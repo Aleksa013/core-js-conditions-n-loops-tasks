@@ -66,8 +66,31 @@ function getMaxNumber(...args) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  const queenCan = [];
+  for (let i = 1; i <= 8; i += 1) {
+    if (queen.x + i <= 8 && queen.y + i <= 8) {
+      queenCan.push(JSON.stringify({ x: queen.x + i, y: queen.y + i }));
+    }
+    if (queen.x + i <= 8 && queen.y - i > 0) {
+      queenCan.push(JSON.stringify({ x: queen.x + i, y: queen.y - i }));
+    }
+    if (queen.x - i > 0 && queen.y + i <= 8) {
+      queenCan.push(JSON.stringify({ x: queen.x - i, y: queen.y + i }));
+    }
+    if (queen.x - i > 0 && queen.y - i > 0) {
+      queenCan.push(JSON.stringify({ x: queen.x - i, y: queen.y - i }));
+    }
+  }
+
+  if (
+    queenCan.includes(JSON.stringify(king)) ||
+    queen.x === king.x ||
+    queen.y === king.y
+  ) {
+    return true;
+  }
+  return false;
 }
 
 /**
