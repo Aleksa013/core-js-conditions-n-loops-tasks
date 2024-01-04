@@ -111,10 +111,23 @@ function canQueenCaptureKing(queen, king) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  let res;
+  if (a !== 0 && b !== 0 && c !== 0) {
+    if (a === b) {
+      res = a + b > c;
+    } else if (a === c) {
+      res = a + c > b;
+    } else if (b === c) {
+      res = b + c > a;
+    } else {
+      res = false;
+    }
+  } else {
+    res = false;
+  }
+  return res;
 }
-
 /**
  * Converts a number to Roman numerals. The number will be between 1 and 39.
  * In this task, the use of methods of the String and Array classes is not allowed.
