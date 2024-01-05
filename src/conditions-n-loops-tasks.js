@@ -205,10 +205,59 @@ function convertToRomanNumerals(num) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let res = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '0':
+        res += 'zero';
+        break;
+      case '1':
+        res += 'one';
+        break;
+      case '2':
+        res += 'two';
+        break;
+      case '3':
+        res += 'three';
+        break;
+      case '4':
+        res += 'four';
+        break;
+      case '5':
+        res += 'five';
+        break;
+      case '6':
+        res += 'six';
+        break;
+      case '7':
+        res += 'seven';
+        break;
+      case '8':
+        res += 'eight';
+        break;
+      case '9':
+        res += 'nine';
+        break;
+      case '.':
+        res += 'point';
+        break;
+      case ',':
+        res += 'point';
+        break;
+      case '-':
+        res += 'minus';
+        break;
+      default:
+        res += '';
+    }
+    if (i !== numberStr.length - 1) {
+      res += ' ';
+    }
+  }
+  return res;
 }
-
+// console.log(convertNumberToString('1950.2'))
 /**
  * Determines whether a string is a palindrome.
  * In this task, the use of methods of the String and Array classes is not allowed.
@@ -221,10 +270,19 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let res;
+  const leng = str.length;
+  for (let i = 0; i < Math.ceil(leng / 2); i += 1) {
+    if (str[i] === str[leng - 1 - i]) {
+      res = true;
+    } else {
+      res = false;
+      break;
+    }
+  }
+  return res;
 }
-
 /**
  * Finds the first occurrence of a letter in a string.
  * In this task, the use of methods of the String and Array classes is not allowed.
