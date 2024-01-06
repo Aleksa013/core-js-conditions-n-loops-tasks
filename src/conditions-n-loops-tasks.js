@@ -391,10 +391,61 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const res = [];
+  for (let i = 0; i < size; i += 1) {
+    res[i] = [];
+    for (let j = 0; j < size; j += 1) {
+      res[i][j] = 0;
+    }
+  }
+  let num = 0;
+  let col = 0;
+  let row = 0;
+  while (num <= size * size - 1) {
+    while (res[row][col] === 0 && col < size) {
+      num += 1;
+      res[row][col] = num;
+      col += 1;
+      if (col === size || res[row][col] !== 0) {
+        col -= 1;
+        row += 1;
+        break;
+      }
+    }
+    while (res[row][col] === 0 && row < size) {
+      num += 1;
+      res[row][col] = num;
+      row += 1;
+      if (row === size || res[row][col] !== 0) {
+        col -= 1;
+        row -= 1;
+        break;
+      }
+    }
+    while (res[row][col] === 0 && col >= 0) {
+      num += 1;
+      res[row][col] = num;
+      col -= 1;
+      if (col === -1 || res[row][col] !== 0) {
+        col += 1;
+        row -= 1;
+        break;
+      }
+    }
+    while (res[row][col] === 0 && row >= 0) {
+      num += 1;
+      res[row][col] = num;
+      row -= 1;
+      if (res[row][col] !== 0) {
+        col += 1;
+        row += 1;
+        break;
+      }
+    }
+  }
+  return res;
 }
-
 /**
  * Rotates a matrix by 90 degrees clockwise in place.
  * Take into account that the matrix size can be very large. Consider how you can optimize your solution.
