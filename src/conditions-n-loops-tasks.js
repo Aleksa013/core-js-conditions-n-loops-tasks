@@ -508,20 +508,23 @@ function rotateMatrix(matrix) {
  */
 function sortByAsc(arr) {
   const sortArr = arr;
-  let one;
-  let i = -1;
-  do {
-    if (arr[i] > arr[i + 1]) {
-      one = arr[i];
-      sortArr[i] = sortArr[i + 1];
-      sortArr[i + 1] = one;
-      i = -1;
-    }
-    i += 1;
-  } while (i < arr.length);
+  const max = Math.max(...sortArr);
+  const resArr = [];
+  for (let i = 0; i < sortArr.length; i += 1) {
+    const min = Math.min(...sortArr);
+    resArr[i] = min;
+    let ind = -1;
+    do {
+      ind += 1;
+    } while (sortArr[ind] !== min);
+    sortArr[ind] = max;
+  }
+  for (let j = 0; j < sortArr.length; j += 1) {
+    sortArr[j] = resArr[j];
+  }
   return sortArr;
 }
-// console.log(sortByAsc([-2, 9, 5, -3]));
+
 /**
  * Shuffles characters in a string so that the characters with an odd index are moved to the end of the string at each iteration.
  * Take into account that the string can be very long and the number of iterations is large. Consider how you can optimize your solution.
@@ -561,7 +564,7 @@ function shuffleChar(str, iterations) {
   }
   return stringFirst;
 }
-// console.log(shuffleChar('qwerty', 3));
+
 /**
  * Returns the nearest largest integer consisting of the digits of the given positive integer.
  * If there is no such number, it returns the original number.
