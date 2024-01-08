@@ -507,14 +507,21 @@ function rotateMatrix(matrix) {
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
 function sortByAsc(arr) {
-const min = Math.min(...arr);
-const sortArr = [];
-for (let i = 0; i < arr; i += 1) {
-
+  const sortArr = arr;
+  let one;
+  let i = -1;
+  do {
+    if (arr[i] > arr[i + 1]) {
+      one = arr[i];
+      sortArr[i] = sortArr[i + 1];
+      sortArr[i + 1] = one;
+      i = -1;
+    }
+    i += 1;
+  } while (i < arr.length);
+  return sortArr;
 }
-return min;
-}
-console.log(sortByAsc([-2, 9, 5, -3]));
+// console.log(sortByAsc([-2, 9, 5, -3]));
 /**
  * Shuffles characters in a string so that the characters with an odd index are moved to the end of the string at each iteration.
  * Take into account that the string can be very long and the number of iterations is large. Consider how you can optimize your solution.
@@ -532,10 +539,29 @@ console.log(sortByAsc([-2, 9, 5, -3]));
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
+function shuffleChar(str, iterations) {
+  let stringFirst = str;
+  let index = 0;
+  let quantity = iterations;
+  let resStr = '';
+  do {
+    resStr += str[index];
+    index += 2;
+  } while (index < str.length);
+  index = 1;
+  do {
+    resStr += str[index];
+    index += 2;
+  } while (index < str.length);
+  if (quantity === 1) {
+    stringFirst = resStr;
+  } else {
+    quantity -= 1;
+    stringFirst = shuffleChar(resStr, quantity);
+  }
+  return stringFirst;
 }
-
+// console.log(shuffleChar('qwerty', 3));
 /**
  * Returns the nearest largest integer consisting of the digits of the given positive integer.
  * If there is no such number, it returns the original number.
