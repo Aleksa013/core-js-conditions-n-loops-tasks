@@ -506,6 +506,7 @@ function rotateMatrix(matrix) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
+
 function sortByAsc(arr) {
   const sortArr = arr;
   const max = Math.max(...sortArr);
@@ -524,6 +525,7 @@ function sortByAsc(arr) {
   }
   return sortArr;
 }
+// console.log(sortByAsc([2, 9, 5]))
 
 /**
  * Shuffles characters in a string so that the characters with an odd index are moved to the end of the string at each iteration.
@@ -542,29 +544,30 @@ function sortByAsc(arr) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(str, iterations) {
-  let stringFirst = str;
-  let index = 0;
-  let quantity = iterations;
-  let resStr = '';
-  do {
-    resStr += str[index];
-    index += 2;
-  } while (index < str.length);
-  index = 1;
-  do {
-    resStr += str[index];
-    index += 2;
-  } while (index < str.length);
-  if (quantity === 1) {
-    stringFirst = resStr;
-  } else {
-    quantity -= 1;
-    stringFirst = shuffleChar(resStr, quantity);
-  }
-  return stringFirst;
-}
 
+function shuffleChar(str, iterations) {
+  let resStr = str;
+  const iter = iterations;
+  let one = '';
+  let two = '';
+  const result = [];
+  let i = 1;
+  do {
+    for (let k = 1; k < resStr.length - 1; k += 2) {
+      one += resStr[k + 1];
+      two += resStr[k];
+    }
+    resStr = str[0] + one + two + str[str.length - 1];
+    result[i] = resStr;
+    one = '';
+    two = '';
+    if (resStr === str) {
+      return result[iter % i];
+    }
+    i += 1;
+  } while (iter >= i);
+  return resStr;
+}
 /**
  * Returns the nearest largest integer consisting of the digits of the given positive integer.
  * If there is no such number, it returns the original number.
